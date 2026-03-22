@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>與光影同行的和諧畫廊 - 感謝有妳</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+
+    <script>
+        // 配置 Tailwind 莫蘭迪色系與字體
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gallery: {
+                            'bg': '#FDFCF8',
+                            'accent': '#EBE6D8',
+                            'text': '#4A4A4A',
+                            'title': '#333333',
+                            'serif-title': '#2B2B2B',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Noto Sans TC', 'sans-serif'],
+                        'serif': ['Noto Serif TC', 'serif'],
+                        'aesthetic': ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FDFCF8;
+            color: #4A4A4A;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FDFCF8; }
+        ::-webkit-scrollbar-thumb { background: #EBE6D8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D9D2C4; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-image-container:hover .gallery-image {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            justify-content: center; align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: zoom-out;
+        }
+        #lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+        #lightbox-img {
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 0 40px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease;
+            border-radius: 4px;
+        }
+        #lightbox:not(:active) #lightbox-img {
+            transform: scale(0.9);
+        }
+        .cursor-zoom-in { cursor: zoom-in; }
+    </style>
+</head>
+<body class="font-sans">
+
+    <header class="min-h-screen flex flex-col justify-center items-center text-center px-6 py-24 bg-gallery-bg">
+        <div class="reveal">
+            <p class="font-aesthetic italic text-xl text-gallery-serif-title mb-4">A Journey of Light & Gratitude</p>
+            <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-gallery-title leading-tight mb-8">
+                感謝妳，用光影陪我渡過這些日子
+            </h1>
+            <p class="text-lg text-gallery-text max-w-2xl mx-auto leading-relaxed mb-12">
+                這些美麗的和諧粉彩畫作，配上富有力量的經文，<br>
+                在我低潮時給了我很多溫暖與力量。
+            </p>
+            <div class="mt-8">
+                <a href="#gallery" class="inline-block bg-gallery-text text-gallery-bg font-medium px-8 py-3 rounded-full hover:bg-gallery-title transition-colors">謝謝你</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="gallery" class="py-24 md:py-32 px-6 bg-gallery-bg">
+        <div class="max-w-7xl mx-auto space-y-32 md:space-y-48">
+
+            <article class="grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-20 reveal">
+                <div class="gallery-image-container relative overflow-hidden rounded-xl shadow-lg transition-all duration-500 ease-in-out cursor-zoom-in" onclick="openLightbox('Gallery/day1.jpeg')">
+                    <img src="Gallery/day1.jpeg" alt="和諧粉彩畫作 1" class="gallery-image w-full h-auto object-cover transition-transform duration-500">
+                </div>
+                <div class="space-y-6 md:pl-10">
+                    <div class="flex items-center gap-3">
+                        <span class="font-serif text-sm bg-gallery-accent px-4 py-1.5 rounded-full text-gallery-title">3月13日</span>
+                        <div class="h-px flex-grow bg-gallery-accent"></div>
+                    </div>
+                    <p class="text-base text-gallery-text leading-relaxed mt-4">
+                        （謝謝妳醉了仍然想用畫作鼓勵我）
+                    </p>
+                </div>
+            </article>
+
+            <article class="grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-20 reveal">
+                <div class="space-y-6 md:pr-10 order-2 md:order-1">
+                    <div class="flex items-center gap-3">
+                        <span class="font-serif text-sm bg-gallery-accent px-4 py-1.5 rounded-full text-gallery-title">3月15日</span>
+                        <div class="h-px flex-grow bg-gallery-accent"></div>
+                    </div>
+                    <p class="text-base text-gallery-text leading-relaxed mt-4">
+                        （妳特地把工具找了出來）
+                    </p>
+                </div>
+                <div class="gallery-image-container relative overflow-hidden rounded-xl shadow-lg transition-all duration-500 ease-in-out order-1 md:order-2 cursor-zoom-in" onclick="openLightbox('Gallery/day1(2).jpeg')">
+                    <img src="Gallery/day1(2).jpeg" alt="和諧粉彩畫作 2" class="gallery-image w-full h-auto object-cover transition-transform duration-500">
+                </div>
+            </article>
+
+            <article class="grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-20 reveal">
+                <div class="gallery-image-container relative overflow-hidden rounded-xl shadow-lg transition-all duration-500 ease-in-out cursor-zoom-in" onclick="openLightbox('Gallery/day1(3).jpeg')">
+                    <img src="Gallery/day1(3).jpeg" alt="和諧粉彩畫作 3" class="gallery-image w-full h-auto object-cover transition-transform duration-500">
+                </div>
+                <div class="space-y-6 md:pl-10">
+                    <div class="flex items-center gap-3">
+                        <span class="font-serif text-sm bg-gallery-accent px-4 py-1.5 rounded-full text-gallery-title">還是3月15日</span>
+                        <div class="h-px flex-grow bg-gallery-accent"></div>
+                    </div>
+                    <p class="text-base text-gallery-text leading-relaxed mt-4">
+                        （畫了不止一幅好美的畫, 妳用袋細心地封好）
+                    </p>
+                </div>
+            </article>
+
+            <article class="grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-20 reveal">
+                <div class="space-y-6 md:pr-10 order-2 md:order-1">
+                    <div class="flex items-center gap-3">
+                        <span class="font-serif text-sm bg-gallery-accent px-4 py-1.5 rounded-full text-gallery-title">3月16日</span>
+                        <div class="h-px flex-grow bg-gallery-accent"></div>
+                    </div>
+                    <p class="text-base text-gallery-text leading-relaxed mt-4">
+                        （原來你還留了一幅, 怕我還被同一件事纏繞）
+                    </p>
+                </div>
+                <div class="gallery-image-container relative overflow-hidden rounded-xl shadow-lg transition-all duration-500 ease-in-out order-1 md:order-2 cursor-zoom-in" onclick="openLightbox('Gallery/day2.jpeg')">
+                    <img src="Gallery/day2.jpeg" alt="和諧粉彩畫作 4" class="gallery-image w-full h-auto object-cover transition-transform duration-500">
+                </div>
+            </article>
+
+            <article class="grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-20 reveal">
+                <div class="gallery-image-container relative overflow-hidden rounded-xl shadow-lg transition-all duration-500 ease-in-out cursor-zoom-in" onclick="openLightbox('Gallery/day2(2).jpeg')">
+                    <img src="Gallery/day2(2).jpeg" alt="和諧粉彩畫作 5" class="gallery-image w-full h-auto object-cover transition-transform duration-500">
+                </div>
+                <div class="space-y-6 md:pl-10">
+                    <div class="flex items-center gap-3">
+                        <span class="font-serif text-sm bg-gallery-accent px-4 py-1.5 rounded-full text-gallery-title">3月16日. 下班的時候</span>
+                        <div class="h-px flex-grow bg-gallery-accent"></div>
+                    </div>
+                    <p class="text-base text-gallery-text leading-relaxed mt-4">
+                        （妳新畫了一幅深色背景襯托黃色的月亮。海是比天空更深沉的）
+                    </p>
+                </div>
+            </article>
+
+            <article class="grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-20 reveal">
+                <div class="space-y-6 md:pr-10 order-2 md:order-1">
+                    <div class="flex items-center gap-3">
+                        <span class="font-serif text-sm bg-gallery-accent px-4 py-1.5 rounded-full text-gallery-title">3月17日</span>
+                        <div class="h-px flex-grow bg-gallery-accent"></div>
+                    </div>
+                    <p class="text-base text-gallery-text leading-relaxed mt-4">
+                        （妳說怕我還是煩躁。所以這畫表達的是peaceful的感覺）
+                    </p>
+                </div>
+                <div class="gallery-image-container relative overflow-hidden rounded-xl shadow-lg transition-all duration-500 ease-in-out order-1 md:order-2 cursor-zoom-in" onclick="openLightbox('Gallery/day3.jpeg')">
+                    <img src="Gallery/day3.jpeg" alt="和諧粉彩畫作 6" class="gallery-image w-full h-auto object-cover transition-transform duration-500">
+                </div>
+            </article>
+
+            <article class="grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-20 reveal">
+                <div class="gallery-image-container relative overflow-hidden rounded-xl shadow-lg transition-all duration-500 ease-in-out cursor-zoom-in" onclick="openLightbox('Gallery/day4.jpeg')">
+                    <img src="Gallery/day4.jpeg" alt="和諧粉彩畫作 7" class="gallery-image w-full h-auto object-cover transition-transform duration-500">
+                </div>
+                <div class="space-y-6 md:pl-10">
+                    <div class="flex items-center gap-3">
+                        <span class="font-serif text-sm bg-gallery-accent px-4 py-1.5 rounded-full text-gallery-title">3月18日</span>
+                        <div class="h-px flex-grow bg-gallery-accent"></div>
+                    </div>
+                    <p class="text-base text-gallery-text leading-relaxed mt-4">
+                        （是美麗的桂林。妳說前一晚夜歸了, 但是怕我處理事情的時候又勾起這份擔心）
+                    </p>
+                </div>
+            </article>
+
+            <article class="grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-20 reveal">
+                <div class="space-y-6 md:pr-10 order-2 md:order-1">
+                    <div class="flex items-center gap-3">
+                        <span class="font-serif text-sm bg-gallery-accent px-4 py-1.5 rounded-full text-gallery-title">3月19日</span>
+                        <div class="h-px flex-grow bg-gallery-accent"></div>
+                    </div>
+                    <p class="text-base text-gallery-text leading-relaxed mt-4">
+                        （妳前一晚睏了,但是見我對桂林山水有好感,還是希望這幅畫能讓我舒服一點）
+                    </p>
+                </div>
+                <div class="gallery-image-container relative overflow-hidden rounded-xl shadow-lg transition-all duration-500 ease-in-out order-1 md:order-2 cursor-zoom-in" onclick="openLightbox('Gallery/day5.jpeg')">
+                    <img src="Gallery/day5.jpeg" alt="和諧粉彩畫作 8" class="gallery-image w-full h-auto object-cover transition-transform duration-500">
+                </div>
+            </article>
+
+            <article class="grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-20 reveal">
+                <div class="gallery-image-container relative overflow-hidden rounded-xl shadow-lg transition-all duration-500 ease-in-out cursor-zoom-in" onclick="openLightbox('Gallery/day6.jpeg')">
+                    <img src="Gallery/day6.jpeg" alt="和諧粉彩畫作 9" class="gallery-image w-full h-auto object-cover transition-transform duration-500">
+                </div>
+                <div class="space-y-6 md:pl-10">
+                    <div class="flex items-center gap-3">
+                        <span class="font-serif text-sm bg-gallery-accent px-4 py-1.5 rounded-full text-gallery-title">3月20日</span>
+                        <div class="h-px flex-grow bg-gallery-accent"></div>
+                    </div>
+                    <p class="text-base text-gallery-text leading-relaxed mt-4">
+                        （是很美的燭光。但妳很有趣地叫我留意爛掉的畫框）
+                    </p>
+                </div>
+            </article>
+
+            <article class="grid grid-cols-1 md:grid-cols-2 items-center gap-12 md:gap-20 reveal">
+                <div class="space-y-6 md:pr-10 order-2 md:order-1">
+                    <div class="flex items-center gap-3">
+                        <span class="font-serif text-sm bg-gallery-accent px-4 py-1.5 rounded-full text-gallery-title">還是3月20日</span>
+                        <div class="h-px flex-grow bg-gallery-accent"></div>
+                    </div>
+                    <p class="text-base text-gallery-text leading-relaxed mt-4">
+                        （妳工作雖然經歷不少辛苦, 但希望我可以留意眼下美麗的風景。嗯, 的確有讓我留意到呢）
+                    </p>
+                </div>
+                <div class="gallery-image-container relative overflow-hidden rounded-xl shadow-lg transition-all duration-500 ease-in-out order-1 md:order-2 cursor-zoom-in" onclick="openLightbox('Gallery/day6(2).jpeg')">
+                    <img src="Gallery/day6(2).jpeg" alt="和諧粉彩畫作 10" class="gallery-image w-full h-auto object-cover transition-transform duration-500">
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="py-16 md:py-20 px-6 bg-gallery-bg text-center border-t border-gallery-accent/50">
+        <div class="max-w-xl mx-auto reveal">
+            <p class="font-serif text-xl md:text-2xl text-gallery-serif-title leading-relaxed mb-4">
+                謝謝妳，成為我生命中的光。
+            </p>
+            <div class="text-3xl text-red-400 mb-6">❤️</div>
+            <p class="text-sm text-gallery-text opacity-70">A digital gallery gifted with love • March 2026</p>
+        </div>
+    </footer>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="放大觀看畫作">
+    </div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        reveals.forEach(reveal => {
+            revealObserver.observe(reveal);
+        });
+
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(imgUrl) {
+            lightboxImg.src = imgUrl;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            setTimeout(() => {
+                lightboxImg.src = '';
+            }, 300);
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>
